@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>வயது கணிப்பி | Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input, button {
+      font-size: 1rem;
+      padding: 10px;
+      margin-top: 10px;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>வயது கணிப்பி | Age Calculator</h2>
+    <label>பிறந்த தேதி / Date of Birth:</label><br>
+    <input type="date" id="dob"><br><br>
+    <button onclick="calculateAge()">கணக்கிடு / Calculate</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      const today = new Date();
+      if (isNaN(dob)) {
+        document.getElementById("result").innerText = "தயவுசெய்து செல்லுபடியாகும் பிறந்த தேதியை உள்ளிடவும்.";
+        return;
+      }
+
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        days += 30;
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const result = `உங்கள் வயது: ${years} ஆண்டுகள், ${months} மாதங்கள், ${days} நாட்கள்.
+Your age is: ${years} years, ${months} months, and ${days} days.`;
+
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
